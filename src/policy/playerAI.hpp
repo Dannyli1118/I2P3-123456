@@ -12,4 +12,4 @@ public:
   static Move get_move(State *state, int depth);
 };
 
-int minimax(State *state ,int dep, int player);
+int minimax(State *state ,int dep, int player, int init_player);

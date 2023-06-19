@@ -19,7 +19,7 @@ Move PlayerAI::get_move(State *state, int depth){
     int max_value = -1000;
 
     for(auto it: state->legal_actions){
-        int tmp_value = minimax(state->next_state(it), 2, state->player);
+        int tmp_value = minimax(state->next_state(it), 2, 0);
         if(tmp_value>max_value){
             tmp_value = max_value;
             max_value_move = it;
@@ -35,7 +35,7 @@ int minimax(State *state ,int dep, int player){
     }
 
     if(dep==0 || !state->legal_actions.empty()){
-        return state->evaluate();
+            return state->evaluate();       
     }
 
     if(player){
