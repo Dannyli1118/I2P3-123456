@@ -13,7 +13,84 @@
  */
 int State::evaluate(){
   // [TODO] design your own evaluation function
-  return 0;
+  int num = 0, now_piece;
+  auto self_board = this->board.board[this->player];
+  auto enemy_board = this->player==0?this->board.board[1]:this->board.board[0];
+
+  for(int i=0; i<BOARD_H; i++){
+      for(int j=0; j<BOARD_W; j++){
+          if((now_piece=self_board[i][j])){
+            switch (now_piece){
+                case 0:
+                break; 
+                
+                case 1: 
+                    num+=1;
+                break;
+
+                case 2:
+                    num+=5;
+                break; 
+
+                case 3:
+                    num+=3;
+                break;
+
+                case 4:
+                    num+=3;
+                break;
+
+                case 5:
+                    num+=9;
+                break;
+
+                case 6:
+                    num+=100;
+                break;
+
+                default: break;
+            }
+          }
+      } 
+  }
+
+  for(int i=0; i<BOARD_H; i++){
+      for(int j=0; j<BOARD_W; j++){
+          if((now_piece=enemy_board[i][j])){
+            switch (now_piece){
+                case 0:
+                break; 
+                
+                case 1: 
+                    num-=1;
+                break;
+
+                case 2:
+                    num-=5;
+                break; 
+
+                case 3:
+                    num-=3;
+                break;
+
+                case 4:
+                    num-=3;
+                break;
+
+                case 5:
+                    num-=9;
+                break;
+
+                case 6:
+                    num-=100;
+                break;
+
+                default: break;
+            }
+          }
+      } 
+  }
+  return num;
 }
 
 
