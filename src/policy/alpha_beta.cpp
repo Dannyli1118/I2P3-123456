@@ -16,7 +16,7 @@ Move Alpha_Beta::get_move(State *state, int depth){
     }
 
     Move max_value_move;
-    int max_value = -1000;
+    int max_value = -1000000;
 
     for(auto it: state->legal_actions){
         int tmp_value = minimax(state->next_state(it), depth-1,-100000, 100000, 0, state->player);
