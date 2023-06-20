@@ -32,11 +32,13 @@ Move PlayerAI::get_move(State *state, int depth){
 
 int minimax(State *state ,int dep, int player, int init_player){
     
-    if(state->player==init_player && state->game_state == WIN){
-        return 10000;
-    }
-    if(state->player!=init_player && state->game_state == WIN){
-        return -10000;
+    if(state->game_state == WIN){
+        if(state->player==init_player){
+            return 10000;
+        }
+        else if(state->player!=init_player){
+            return -10000;
+        }
     }
     
     if(!state->legal_actions.size()){

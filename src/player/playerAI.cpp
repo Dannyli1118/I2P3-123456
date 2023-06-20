@@ -40,7 +40,7 @@ void read_board(std::ifstream& fin) {
  */
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
-  int dp=4;
+  int dp=3;
   while(true) {
     // Choose a random spot.
     auto move = PlayerAI::get_move(root, dp++);
