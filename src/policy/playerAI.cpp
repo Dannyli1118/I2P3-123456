@@ -19,36 +19,45 @@ Move PlayerAI::get_move(State *state, int depth){
     int max_value = -1000;
 
     for(auto it: state->legal_actions){
-        int tmp_value = minimax(state->next_state(it), 2, 0);
+        int tmp_value = minimax(state->next_state(it), depth-1, 0, state->player);
         if(tmp_value>max_value){
-            tmp_value = max_value;
+            max_value = tmp_value;
             max_value_move = it;
         }
+        //printf("%d\n", tmp_value);
     }
     return max_value_move;
 }
 
 
-int minimax(State *state ,int dep, int player){
+int minimax(State *state ,int dep, int player, int init_player){
+    
+    if(state->player==init_player && state->game_state == WIN){
+        return 10000;
+    }
+    if(state->player!=init_player && state->game_state == WIN){
+        return -10000;
+    }
+    
     if(!state->legal_actions.size()){
         state->get_legal_actions();
     }
 
-    if(dep==0 || !state->legal_actions.empty()){
-            return state->evaluate();       
+    if(dep==0 || state->legal_actions.empty()){
+        return state->evaluate(init_player);
     }
 
-    if(player){
-        int tmp_value = -1000;
+    if(player==1){
+        int tmp_value = -100000;
         for(auto it:state->legal_actions){
-            tmp_value = std::max(tmp_value,minimax(state->next_state(it),dep-1,0));
+            tmp_value = std::max(tmp_value,minimax(state->next_state(it), dep-1, 0, init_player));
         }
         return tmp_value;
     }  
     else{
-        int tmp_value = 1000;
+        int tmp_value = 100000;
         for(auto it:state->legal_actions){
-            tmp_value = std::min(tmp_value,minimax(state->next_state(it),dep-1,1));
+            tmp_value = std::min(tmp_value,minimax(state->next_state(it), dep-1, 1, init_player));
         }
         return tmp_value;
     }

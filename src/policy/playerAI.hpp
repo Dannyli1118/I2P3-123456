@@ -1,7 +1,5 @@
 #pragma once
 #include "../state/state.hpp"
-#include <set>
-
 /**
  * @brief Policy class for random policy, 
  * your policy class should have get_move method

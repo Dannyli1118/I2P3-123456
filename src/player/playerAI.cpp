@@ -40,15 +40,16 @@ void read_board(std::ifstream& fin) {
  */
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
+  int dp=4;
   while(true) {
     // Choose a random spot.
-    auto move = PlayerAI::get_move(root, 0);
+    auto move = PlayerAI::get_move(root, dp++);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
     
     // Remember to flush the output to ensure the last action is written to file.
     fout.flush();
-    break;
+    //break;
   }
 }
 

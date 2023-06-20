@@ -11,11 +11,11 @@
  * 
  * @return int 
  */
-int State::evaluate(){
+int State::evaluate(int init_player){
   // [TODO] design your own evaluation function
   int num = 0, now_piece;
-  auto self_board = this->board.board[this->player];
-  auto enemy_board = this->player==0?this->board.board[1]:this->board.board[0];
+  auto self_board = this->board.board[init_player];
+  auto enemy_board = this->board.board[1-init_player];
 
   for(int i=0; i<BOARD_H; i++){
       for(int j=0; j<BOARD_W; j++){
@@ -33,19 +33,19 @@ int State::evaluate(){
                 break; 
 
                 case 3:
-                    num+=3;
+                    num+=5;
                 break;
 
                 case 4:
-                    num+=3;
+                    num+=5;
                 break;
 
                 case 5:
-                    num+=9;
+                    num+=10;
                 break;
 
                 case 6:
-                    num+=100;
+                    num+=1000;
                 break;
 
                 default: break;
@@ -70,19 +70,19 @@ int State::evaluate(){
                 break; 
 
                 case 3:
-                    num-=3;
+                    num-=5;
                 break;
 
                 case 4:
-                    num-=3;
+                    num-=5;
                 break;
 
                 case 5:
-                    num-=9;
+                    num-=10;
                 break;
 
                 case 6:
-                    num-=100;
+                    num-=1000;
                 break;
 
                 default: break;
