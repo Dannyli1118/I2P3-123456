@@ -19,7 +19,7 @@ Move Submission::get_move(State *state, int depth){
     int max_value = -1000000;
 
     for(auto it: state->legal_actions){
-        int tmp_value = minimax(state->next_state(it), depth-1,-100000, 100000, 0, state->player);
+        int tmp_value = sub(state->next_state(it), depth-1,-100000, 100000, 0, state->player);
         if(tmp_value>max_value){
             max_value = tmp_value;
             max_value_move = it;
@@ -30,7 +30,7 @@ Move Submission::get_move(State *state, int depth){
 }
 
 
-int minimax(State *state ,int dep, int alpha, int beta, int player, int init_player){
+int sub(State *state ,int dep, int alpha, int beta, int player, int init_player){
     
     if(state->game_state == WIN){
         if(state->player==init_player){
@@ -52,7 +52,7 @@ int minimax(State *state ,int dep, int alpha, int beta, int player, int init_pla
     if(player==1){
         int tmp_value = -100000;
         for(auto it:state->legal_actions){
-            tmp_value = std::max(tmp_value,minimax(state->next_state(it), dep-1, alpha, beta, 0, init_player));
+            tmp_value = std::max(tmp_value,sub(state->next_state(it), dep-1, alpha, beta, 0, init_player));
             alpha = std::max(alpha,tmp_value);
             if(alpha>=beta){
                 break;
@@ -63,7 +63,7 @@ int minimax(State *state ,int dep, int alpha, int beta, int player, int init_pla
     else{
         int tmp_value = 100000;
         for(auto it:state->legal_actions){
-            tmp_value = std::min(tmp_value,minimax(state->next_state(it), dep-1, alpha, beta, 1, init_player));
+            tmp_value = std::min(tmp_value,sub(state->next_state(it), dep-1, alpha, beta, 1, init_player));
             beta = std::min(beta,tmp_value);
             if(alpha>=beta){
                 break;
