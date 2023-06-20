@@ -3,7 +3,7 @@
 
 #include "../config.hpp"
 #include "../state/state.hpp"
-#include "../policy/alpha_beta.hpp"
+#include "../policy/minimax.hpp"
 
 
 State* root;
@@ -40,10 +40,10 @@ void read_board(std::ifstream& fin) {
  */
 void write_valid_spot(std::ofstream& fout) {
   // Keep updating the output until getting killed.
-  int dp=4;
+  int dp=3;
   while(true) {
     // Choose a random spot.
-    auto move = Alpha_Beta::get_move(root, dp++);
+    auto move = PlayerAI::get_move(root, dp++);
     fout << move.first.first << " " << move.first.second << " "\
          << move.second.first << " " << move.second.second << std::endl;
     
